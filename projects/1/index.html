@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Find My Car!</title>
+        <style>
+            p, h1 {font-family: helvetica;}
+            p {font-size:1.5em;line-height:1.5em; margin-left: 24px;}
+            pre {font-size: 2em;}
+            
+            div {
+                background-color:lightgray; 
+                border: 1px solid black; 
+                border-radius: 6px;
+                min-height:75px;
+                padding:15px;
+            }
+            .red{background-color: red;}
+            .blue{background-color: blue;}
+            .pink{background-color: pink;}
+            .yellow{background-color: yellow;}
+            .purple{background-color: purple;}
+            .brown{background-color: brown;}
+            .green{background-color: green;}
+            .orange{background-color: orange;}
+              #map-canvas {
+        height: 30%;}
+         .output{padding: 100px; border-radius: 40px; width: 30px; margin-right: auto; margin-left: auto; margin-top: 100px; height: 30%;}
+        
+
+        </style>
+    </head>
+    <body>
+    <h1>Find a train stop</h1>
+    
+    <!-- div for instructions and form -->
+    <div id="form">
+        <p>
+            Enter a stop name. 
+            <br>
+            Visit <a href="https://data.cityofchicago.org/Transportation/Towed-Vehicles/ygr5-vcbg">the Data Portal page for the towed vehicles dataset</a> to find a valid plate number.</p>
+        <input id="txtPlate" type="text" placeholder="Enter your License Plate"></input>
+        <button type="button" id="btnSearch" >Find stop</button>
+        <button id="show-map">Show on map></button>
+    </div>
+    
+    <!-- a div to store the results -->
+    <div id="results">
+        
+        
+        
+    </div>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        var showMap = $('#show-map');
+
+function initialize() {
+    var mapOptions = {
+	    center: { lat: 0, lng: 0 },
+	    zoom: 8
+	};
+	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+}
+
+$(document).ready(function(){
+    $('#show-map').on('click',initialize)
+});
+    </script>
+    <script>
+        /*
+            This script retrieves towed vehicle data for the entered plate
+        */
+        
+       
+        $(function () {    // don't execute code until DOM is ready
+            /*
+                most code should wait for the button click event,
+                but creating and setting some variables *can* be 
+                done when the page loads
+            */
+            var i;
+            // api endpoint for the towed vehicle data
+            var baseURL = 'https://data.cityofchicago.org/resource/8mj8-j3c4.json';
+            
+            // optional filters we're appending: plate
+            var filters = '?station_name=';
+            
+            // the url; we'll append the plate number in button click
+            var url = baseURL + filters;   
+            
+            console.log (url);
+            
+            // start with button disabled
+            $("#btnSearch").attr("disabled", true);
+            
+            // enable button only if text in input box
+            $("#txtPlate").keyup(function(){   // change event doesn't work, so using keyup 
+                if ($("#txtPlate").val() == "") {   // if value is empty
+                    $("#btnSearch").attr("disabled", true)  // set disabled
+                }
+                else {
+                    $("#btnSearch").attr("disabled", false)
+                }
+            });
+            
+            
+            
+         
+           
+            // we want to get the data and display on button click
+            $("#btnSearch").on("click", function() {
+                
+                // each time we search, we need to clear the results
+                $("#results").html("");
+                
+                // get the input plate number
+                //   and append to url in getJSON call
+                var plateNum = $("#txtPlate").val();
+           
+                var urlWithParams = url + plateNum;
+                console.log(urlWithParams);  // verify that it's being created correctly
+           
+                // jQuery command to retrieve json data
+                
+                $.getJSON(urlWithParams)       // append the plateNum
+                    .done (function (data) {    // execute this function when getJSON is done
+                        
+                        console.log(data);
+                        
+                        var numRecords = data.length;  // the length of the array
+                        
+                        // notify of number of records
+                        var message = 
+                            "<p>Records found: "
+                            + numRecords
+                            + "</p>";
+                        
+                        $("#results").append(message);
+                        
+                        
+                        // only loop records if count > 0
+                        if (numRecords > 0) {
+                            // loop through the records
+                            $.each (data , 
+                                function (index, value) {
+                                    // append content to the body 
+var html = "<div id = " + i + ">" + "<h2>Train Stop</h2>" +  "<h2>Train Stop: " + value.stop_name + "</h2>" + 
+                        "<h2>Train Station: " + value.station_descriptive_name + "</h2>" + "<h2>Red: " + value.red + "</h2>" + 
+                        "</div>" + "<br>";
+                        $("body").append(html);
+                        $("div").css("border-radius", "25px");
+                        $("div").css("border", "2px solid black");
+                        if (value.red == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("red");
+                            //$(".red").css("background", "red");
+                        }
+                        else if (value.blue == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("blue");
+                            //$(".blue").css("background", "blue");
+                        }
+                        else if (value.g == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("green");
+                            //$(".green").css("background", "green");
+                            console.log(value.g)
+                        }
+                        else if (value.brn == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("brown");
+                            //$(".brown").css("background", "brown");
+                        }
+                        else if (value.p == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("purple");
+                            //$(".purple").css("background", "purple");
+                        }
+                        else if (value.y == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("yellow");
+                            //$(".yellow").css("background", "yellow");
+                        }
+                        else if (value.pnk == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("pink");
+                            //$(".pink").css("background", "pink");
+                        }
+                        else if (value.o == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("orange");
+                            //$(".orange").css("background", "orange");
+                        }
+                        i++;
+                            
+                                
+                                }  // end of function
+                            
+                            ); // end of each loop                            
+                        
+                        }   // end of if statement
+                        
+
+                    });  // end of getJSON
+            
+            });  // end of button click event
+        
+        }); // end of jQuery wrapper
+                                          
+    </script>
+    <div id="map-canvas" class="output">
+    </div>
+    </body>
+</html>
