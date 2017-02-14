@@ -1,0 +1,63 @@
+<HTML>
+  <HEAD>
+
+</head>
+<body>
+  <canvas id="myCanvas" width="400" height="400">
+        Your browser does not support the canvas element.
+        </canvas>
+                 
+         <script>
+          //create a reference to the canvas element
+            var canvas = document.getElementById("myCanvas");
+            
+            //create a reference to the drawing object
+            var ctx = canvas.getContext("2d");
+            
+            var circleX = 0;
+var direction = 1;
+
+function draw() {
+
+  ctx.clearRect(0, 0, 500, 100);
+  ctx.beginPath();
+  ctx.arc(circleX, 50, 20, 0, 2 * Math.PI);
+  ctx.fill();
+
+  if (circleX >= (canvas.width - 10)) {
+    direction = -3;
+  } else if (circleX <= 10) {
+    direction = 3;
+  }
+
+
+
+  circleX = circleX + direction;
+
+
+
+  window.requestAnimationFrame(draw);
+}
+
+window.requestAnimationFrame(draw);
+ctx.beginPath();
+document.getElementById("myCanvas").addEventListener("mousemove", function(){
+//ctx.beginPath(); - Path for circle
+//var size = Math.floor((Math.random() * 50) + 1);
+var color = '#'+ Math.floor(Math.random()*16777215).toString(16)
+ctx.fillStyle = color;
+// ctx.arc(event.pageX,event.pageY, size , 0,2*Math.PI); - Draw circle
+ctx.lineTo(event.pageX, event.pageY)
+ctx.stroke();
+ctx.fill(); 
+}
+);
+document.getElementById("myCanvas").addEventListener("click", function(){
+ctx.beginPath();
+ctx.arc(event.pageX,event.pageY, 10 , 0,2*Math.PI);
+ctx.fill(); 
+}
+);
+</script>
+</body>
+</html>

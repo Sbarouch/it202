@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Sam's Find an Article</title>
+        <style>
+            p, h1 {font-family: helvetica;}
+            p {font-size:1.5em;line-height:1.5em; margin-left: 24px;}
+            pre {font-size: 12;}
+            
+            .div1 {
+                background-color:lightgray; 
+                border: 1px solid black; 
+                border-radius: 6px;
+                min-height:75px;
+                padding:15px;
+            }
+            .purple{background-color:#9261d3; color:white; border-radius:20px; height:600px; width:850px; font-size:12;}
+
+        </style>
+    </head>
+    <body>
+    <h1>Find an article</h1>
+    
+    <!-- div for instructions and form -->
+    <div id="form" class="div1">
+        <p>
+            Enter a document type to search for an article. 
+            <br>
+            Visit <a href="https://developer.nytimes.com/article_search_v2.json#/Console/GET/articlesearch.json">the New York Time's API page</a> to find a valid article type (document_type).</p>
+        <input id="txtPlate" type="text" placeholder="Enter an article type"></input>
+        <button type="button" id="btnSearch" >Search</button>
+    </div>
+    
+    <!-- a div to store the results -->
+    <div id="results">
+        
+        
+        
+    </div>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+        /*
+            This script retrieves towed vehicle data for the entered plate
+        */
+        
+       
+        $(function () {    // don't execute code until DOM is ready
+            /*
+                most code should wait for the button click event,
+                but creating and setting some variables *can* be 
+                done when the page loads
+            */
+
+            // api endpoint for the towed vehicle data
+           var baseUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+            // optional filters we're appending: plate
+            var filters = '?' + $.param({'api-key': "1ba49f72575b488cb937fea52070f4dc",'document_type': $("txtPlate").val()});
+            
+            // the url; we'll append the plate number in button click
+           var url = baseUrl + filters;   
+            
+            console.log (url);
+            
+            // start with button disabled
+            $("#btnSearch").attr("disabled", true);
+            
+            // enable button only if text in input box
+            $("#txtPlate").keyup(function(){   // change event doesn't work, so using keyup 
+                if ($("#txtPlate").val() == "") {   // if value is empty
+                    $("#btnSearch").attr("disabled", true)  // set disabled
+                }
+                else {
+                    $("#btnSearch").attr("disabled", false)
+                }
+            })
+            
+            
+            
+         
+           
+            // we want to get the data and display on button click
+            $("#btnSearch").on("click", function() {
+                
+                // each time we search, we need to clear the results
+                $("#results").html("");
+                
+                // get the input plate number
+                //   and append to url in getJSON call
+           
+                var urlWithParams = url;
+                console.log(urlWithParams);  // verify that it's being created correctly
+           
+                // jQuery command to retrieve json data
+                
+                $.getJSON(urlWithParams)       // append the plateNum
+                    .done (function (data) {    // execute this function when getJSON is done
+                        
+                        console.log(data);
+                        
+                        var numRecords = data.response.docs.length;  // the length of the array
+                        
+                        // notify of number of records
+                        var message = 
+                            "<p>Records found: "
+                            + numRecords
+                            + "</p>"
+                        
+                        $("#results").append(message);
+                        
+                        
+                        // only loop records if count > 0
+                        if (numRecords > 0) {
+                            // loop through the records
+                            $.each (data.response.docs, 
+                                function (index, value) {
+                                    // append content to the body 
+                                    var html = "<p class='purple'>"
+                                    + "<b>Headline</B>: "
+                                    + value.headline.name
+                                    + "<br>"
+                                    + "<b>URL: </b> "
+                                    + value.web_url
+                                    + "<br>"
+                                    + "<b>Lead Paragraph:</b> "
+                                    + value.lead_paragraph
+                                    + "<br><b>Publish Date:</b> "
+                                    + value.pub_date
+                                    + "<br><b>Author:</b> "
+                                    + value.byline.original
+                                    + "</p>";
+                                   
+                                    $("#results").append(html);
+     
+                            
+                                
+                                }  // end of function
+                            
+                            ); // end of each loop                            
+                        
+                        }   // end of if statement
+
+                    })  // end of getJSON
+            
+            })  // end of button click event
+        
+        }) // end of jQuery wrapper
+        
+        
+    </script>
+    </body>
+</html>

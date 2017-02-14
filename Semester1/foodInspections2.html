@@ -1,0 +1,139 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Sam Map</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #divMap {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 60%;
+        padding-top: 90px;
+        margin: 0;
+        padding: 0;
+        background-color: #27db45;
+      }
+      .output{padding: 100px; border-radius: 40px; width: 60%; margin-right: auto; margin-left: auto; margin-top: auto; margin-bottom: auto;}
+    </style>
+  </head>
+  <body>
+    <div id="divMap" class="output"></div>
+    <script>
+      var chicagoCoord, inspMap; 
+      
+      // create the map object
+      function initMap() {
+        chicagoCoord = {lat: 41.8781, lng: -87.6298};
+        inspMap = new google.maps.Map(document.getElementById('divMap'), 
+        {
+          zoom: 10,
+          center: chicagoCoord
+        });
+      }
+      
+      
+      
+      // add a marker;  the param should be an inspection record
+      function addMarker (obj) {
+          
+          //  the coordinates are received as text;  
+          //    we need to convert them to numbers
+          var inspLocation = {
+              lat: parseFloat(obj.location.coordinates[1]), 
+              lng: parseFloat(obj.location.coordinates[0])
+          };
+        
+        
+          // construct the html for the info window
+          var contentString = '<div id="content">'+
+              '<div id="siteNotice">'+
+              '</div>'+
+              '<h1 id="firstHeading" class="firstHeading">' + obj.station_descriptive_name + '</h1>'+
+              '<div id="bodyContent">'+
+              'Handicap Accessable: ' +
+              obj.ada +
+              '<br>' +
+              obj.stop_name +
+              '<br>' +
+              "Direction: " +
+              obj.direction_id +
+              '</div>'+
+              '</div>';
+  
+          
+          // create the info window
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          
+          // create the marker
+          var inspMarker = new google.maps.Marker({
+            position: inspLocation,
+            map: inspMap,
+            title: 'Chicago'
+          });
+          
+          // add the event listener
+          inspMarker.addListener('click', function() {
+            infowindow.open(inspMap, inspMarker);
+          });        
+        
+        
+      }
+      
+      
+      
+      </script>
+      
+
+    
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+        // base URL to the food inspections data
+        var inspectionsBaseURL = 'https://data.cityofchicago.org/resource/8mj8-j3c4.json';
+        
+        // optional filters we're appending - date range and zip
+      //  var filters = '?$where=inspection_date%20between%20%272016-10-01T00:00:00%27%20and%20%272017-01-01T00:00:00%27%20and%20zip=60618';
+        
+        // full URL
+        var inspectionsUrl = inspectionsBaseURL; // + filters;
+        
+        console.log (inspectionsUrl);
+      
+      
+      
+      $(function () {
+        
+        initMap();
+        
+        $.getJSON(inspectionsUrl)
+                .done (function (data) {
+                    
+                    // add script to add data to the DOM
+                    console.log(data);
+                    // loop through the records
+                    $.each (data , 
+                        function (index, value) {
+                            // call addMarker for each record
+                            
+                            addMarker(value);
+                            
+                        }
+                    );
+
+                })
+        
+      })
+      
+      
+    </script>
+
+  </body>
+</html>

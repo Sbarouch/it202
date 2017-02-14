@@ -1,0 +1,105 @@
+<html>
+	<head>
+	    <title>Sam B's Project</title>
+		<style>
+		    body{background-color: #7689A9;}
+            p, h1 {font-family: helvetica;}
+            p {font-size:1.5em;line-height:1.5em; margin-left: 24px;}
+            pre {font-size: 2em;}
+        .form{background-color: #4D658D;}
+            .red{background-color: #ed0000; border-radius: 70px; width: 500px;}
+            .blue{background-color: #3b78db; width: 500px; border-radius: 70px;}
+            .pink{background-color: #dd375e; border-radius: 70px; width: 500px;}
+            .yellow{background-color: #fffa05; width: 500px; border-radius: 70px;}
+            .purple{background-color: #963683; width: 500px; border-radius: 70px;}
+            .brown{background-color: #60414a; width: 500px; border-radius: 70px;}
+            .green{background-color: #10681a; width: 500px; border-radius: 70px;}
+            .orange{background-color: #d66e13; width: 500px; border-radius: 70px;}
+		</style>
+	</head>
+	<body>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCgxY6DqJ4TxnRfKjlZR8SfLSQRtOSTxEU"></script>
+    <p class="form">
+        <p>
+            Enter a stop name. 
+            <br>
+            Enter a stop, like "18th" or "Linden"</p>
+        <input id="inputBox" type="text" placeholder="Enter a stop name"></input>
+        <button type="button" id="theButton" >Find stop</button>
+    </p>
+    
+<script>
+        function myFunction(){
+            
+        $("div").remove();
+        
+        var name = document.getElementById("inputBox");
+        var nameFilters = name.value;
+        
+        var stationsURL = 'https://data.cityofchicago.org/resource/8mj8-j3c4.json';
+        
+        
+        var filters = '?station_name=' + nameFilters;
+        
+        
+        var stationsFinalURL = stationsURL + filters;
+        
+        console.log (stationsFinalURL);
+        i = 0;
+            
+            
+            $.getJSON(stationsFinalURL)
+                .done (function (data) {
+                    
+                    console.log(data);
+                    $.each(data, function(i, v){
+                        var html = "<div id = " + i + ">" +  "<h2>Train Stop: " + v.stop_name + "</h2>" + 
+                        "<h2>Train Station: " + v.station_descriptive_name + "</h2>" + "<h2>Direction: " + v.direction_id + "</h2>" + "<h2>" + 
+                        'See Station on Google Map: <a href= "https://www.google.com/maps/place/' + v.location.coordinates[1] + "," + v.location.coordinates[0] + '"> Here</a>' + 
+                        "</h2>" + "</div>" + "<br>";
+
+                        $("body").append(html);
+                        $("div").css("border-radius", "25px");
+                        $("div").css("border", "2px solid black");
+                        $("div").css("width", "750px")
+                        if (v.red == true)
+                        {
+                            $("#" + i).addClass("red");
+                        }
+                        else if (v.blue == true)
+                        {
+                            $("#" + i).addClass("blue");
+                        }
+                        else if (v.g == true)
+                        {
+                            $("#" + i).addClass("green");
+                            console.log(v.g)
+                        }
+                        else if (v.brn == true)
+                        {
+                            $("#" + i).addClass("brown");
+                        }
+                        else if (v.p == true)
+                        {
+                            $("#" + i).addClass("purple");
+                        }
+                        else if (v.y == true)
+                        {
+                            $("#" + i).addClass("yellow");
+                        }
+                        else if (v.pnk == true)
+                        {
+                            $("#" + i).addClass("pink");
+                        }
+                        else if (v.o == true)
+                        {
+                            $("#" + i).addClass("orange");
+                        }
+                        i++;
+                    });
+                });
+        }
+    </script>
+	</body>
+</html>

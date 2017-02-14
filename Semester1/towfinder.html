@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sam's Towed Page</title>
+        <style>
+            p, h1 {font-family: helvetica;}
+            p {font-size:1.5em;line-height:1.5em; margin-left: 24px;}
+            pre {font-size: 2em;}
+            .display {background-color: #57c122; border-radius: 20px; margin-right: 10px; margin-bottom: 10px; float: left; width: 300px; padding: 10px;}
+        </style>
+    </head>
+    <body>
+        <form>
+  Liscense: <input type="text" name="liscense" id="liscense"><br>
+</form>
+<button type="button" id="liscenseButton" >Input</button>
+<Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js">
+                document.getElementById("liscenseButton").onclick=function(){
+        var inspections;
+        
+        // base URL to the food inspections data
+        var inspectionsBaseURL = 'https://data.cityofchicago.org/resource/rp42-fxjt.json';
+        
+        // optional filters we're appending - date range and zip
+        var filters = '?state=IL';
+        
+        // full URL
+        var inspectionsUrl = inspectionsBaseURL + filters;
+        
+        console.log (inspectionsUrl);
+        
+        $(
+            // jQuery command to retrieve json data
+            
+            $.getJSON(inspectionsUrl)
+                .done (function (data) {
+                  
+                $.each(data , function(i,v){
+                    $("body").append("<span class=display>" + "Tow Date : " + v.tow_date + "<br>" + "Make : " + v.make + "<br>" + "Color : " + v.color + "<br>" + "Liscense Plate : " + v.plate + "<br>" + "Inventory Number : " + v.inventory_number + "<span>");
+                });
+                    
+                })     
+        };
+                //    var txtInputLiscense = document.getElementById("liscense");
+                 //   var strLiscense = txtInputLiscense.value;   
+                  //  var message = "";
+                //    if (strLiscense === "") {
+                  //      message = "Hey, enter your liscense plate!";
+                //    }
+                  //  else {
+                    //    message = "You have entered " + strLiscense;
+                //    }
+                 //   alert(message);  
+
+            //    };
+</script>
+    <h1>Cars Tower with Illinois Liscense Plates</h1>
+    </body>
+</html>

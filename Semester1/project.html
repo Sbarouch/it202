@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sam's Pothole Page</title>
+        <style>
+            p, h1 {font-family: helvetica;}
+            p {font-size:1.5em;line-height:1.5em; margin-left: 24px;}
+            pre {font-size: 2em;}
+            .red{background-color: red;}
+            .blue{background-color: blue;}
+            .pink{background-color: pink;}
+            .yellow{background-color: yellow;}
+            .purple{background-color: purple;}
+            .brown{background-color: brown;}
+            .green{background-color: green;}
+            .orange{background-color: orange;}
+      #divMap {
+        height: 30%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .output{padding: 100px; border-radius: 40px; width: 30px; margin-right: auto; margin-left: auto; margin-top: 100px; height: 30%;}
+        </style>
+    </head>
+    <body>
+    <h1>Pothole requests for 60608</h1>
+        <!-- div for instructions and form -->
+    <div id="form" class="div1">
+        <p>
+            Enter a document type to search for an article. 
+            <br>
+            Try a station with a line, such as "95th (Red Line)"</p>
+        <input id="txtPlate" type="text" placeholder="Enter a stop"></input>
+        <button type="button" id="btnSearch" >Search</button>
+    </div>
+    
+    <!-- a div to store the results -->
+    <div id="results">
+        
+        
+        
+    </div>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+    <div id="divMap" class="output"></div>
+    <script>
+      var chicagoCoord, inspMap; 
+      
+      // create the map object
+      function initMap() {
+        chicagoCoord = {lat: 41.8781, lng: -87.6298};
+        inspMap = new google.maps.Map(document.getElementById('divMap'), 
+        {
+          zoom: 10,
+          center: chicagoCoord
+        });
+      }
+      
+      
+      
+      // add a marker;  the param should be an inspection record
+      function addMarker (obj) {
+          
+          //  the coordinates are received as text;  
+          //    we need to convert them to numbers
+          var inspLocation = {
+              lat: parseFloat(obj.location.coordinates[1]), 
+              lng: parseFloat(obj.location.coordinates[0])
+          };
+        
+        
+          // construct the html for the info window
+          var contentString = '<div id="content">'+
+              '<div id="siteNotice">'+
+              '</div>'+
+              '<h1 id="firstHeading" class="firstHeading">' + obj.station_descriptive_name + '</h1>'+
+              '<div id="bodyContent">'+
+              'Handicap Accessable: ' +
+              obj.ada +
+              '<br>' +
+              obj.stop_name +
+              '<br>' +
+              "Direction: " +
+              obj.direction_id +
+              '</div>'+
+              '</div>';
+  
+          
+          // create the info window
+          var infowindow = new google.maps.InfoWindow({
+            content: contentString
+          });
+          
+          // create the marker
+          var inspMarker = new google.maps.Marker({
+            position: inspLocation,
+            map: inspMap,
+            title: 'Chicago'
+          });
+          
+          // add the event listener
+          inspMarker.addListener('click', function() {
+            infowindow.open(inspMap, inspMarker);
+          });        
+        
+        
+      }
+      
+      
+      
+      </script>
+    <script>
+                 $("#btnSearch").on("click", function() {
+        //  variable to hold the returned data
+        var inspections;
+        // base URL to the food inspections data
+        var inspectionsBaseURL = 'https://data.cityofchicago.org/resource/8mj8-j3c4.json';
+        
+        // optional filters we're appending - date range and zip
+        var filters = "?station_descriptive_name="$("txtPlate").val();
+        
+        // full URL
+        var inspectionsUrl = inspectionsBaseURL; + filters;
+        
+        console.log (inspectionsUrl);
+        i = 0;
+        $(
+            // jQuery command to retrieve json data
+            
+            $.getJSON(inspectionsUrl)
+                .done (function (data) {
+                  
+                $.each(data , function(i,v){
+var html = "<div id = " + i + ">" + "<h2>Train Stop</h2>" +  "<h2>Train Stop: " + v.stop_name + "</h2>" + 
+                        "<h2>Train Station: " + v.station_descriptive_name + "</h2>" + "<h2>Red: " + v.red + "</h2>" + 
+                        "</div>" + "<br>";
+                        $("body").append(html);
+                        $("div").css("border-radius", "25px");
+                        $("div").css("border", "2px solid black");
+                        if (v.red == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("red");
+                            //$(".red").css("background", "red");
+                        }
+                        else if (v.blue == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("blue");
+                            //$(".blue").css("background", "blue");
+                        }
+                        else if (v.g == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("green");
+                            //$(".green").css("background", "green");
+                            console.log(v.g)
+                        }
+                        else if (v.brn == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("brown");
+                            //$(".brown").css("background", "brown");
+                        }
+                        else if (v.p == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("purple");
+                            //$(".purple").css("background", "purple");
+                        }
+                        else if (v.y == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("yellow");
+                            //$(".yellow").css("background", "yellow");
+                        }
+                        else if (v.pnk == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("pink");
+                            //$(".pink").css("background", "pink");
+                        }
+                        else if (v.o == true)
+                        {
+                            //$(this).removeClass();
+                            $("#" + i).addClass("orange");
+                            //$(".orange").css("background", "orange");
+                        }
+                        i++;
+                    $("body").append(html);
+                     
+                });
+                    
+                })     
+        );
+                 }
+</script> 
+
+      
+
+    
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script>
+        // base URL to the food inspections data
+        var inspectionsBaseURL = 'https://data.cityofchicago.org/resource/8mj8-j3c4.json';
+        
+        // optional filters we're appending - date range and zip
+      //  var filters = '?$where=inspection_date%20between%20%272016-10-01T00:00:00%27%20and%20%272017-01-01T00:00:00%27%20and%20zip=60618';
+        
+        // full URL
+        var inspectionsUrl = inspectionsBaseURL; // + filters;
+        
+        console.log (inspectionsUrl);
+      
+      
+      
+      $(function () {
+        
+        initMap();
+        
+        $.getJSON(inspectionsUrl)
+                .done (function (data) {
+                    
+                    // add script to add data to the DOM
+                    console.log(data);
+                    // loop through the records
+                    $.each (data , 
+                        function (index, value) {
+                            // call addMarker for each record
+                            
+                            addMarker(value);
+                            
+                        }
+                    );
+
+                });
+        
+      });
+      
+      
+    </script>
+        
+    </script>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sam's Towed Page</title>
+        <style>
+            p, h1 {font-family: helvetica;}
+            p {font-size:1.5em;line-height:1.5em; margin-left: 24px;}
+            pre {font-size: 2em;}
+            .display {background-color: #57c122; border-radius: 20px; margin-right: 10px; margin-bottom: 10px; float: left; width: 300px; padding: 10px;}
+        </style>
+    </head>
+    <body>
+    <h1>Find your car!</h1>
+    <b>Please enter your liscense plate</b>
+    <input id="test" type="text">
+    <br>
+    <br>
+    <div id="box">
+        
+    </div>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+
+        /*
+            This script retrieves food inspection data for zip 60618
+            for the 4th quarter of 2016 from the 
+            City of Chicago Data Portal
+            
+            It stores the returned results in a variable named inspections.
+            
+            This script doesn't update the DOM.
+        
+        
+        */
+        //  variable to hold the returned data
+
+
+        function myFunction(){
+
+
+        var inspections;
+        var data = document.getElementById('test');
+        var liscense = data.value;
+        
+        // base URL to the food inspections data
+       var inspectionsBaseUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+url += '?' + $.param({
+  'api-key': "1ba49f72575b488cb937fea52070f4dc"
+});
+        
+        // optional filters we're appending - date range and zip
+        
+        // full URL
+        var inspectionsUrl = inspectionsBaseURL;
+        
+        console.log (inspectionsUrl);
+        
+        $(
+            // jQuery command to retrieve json data
+            
+            $.getJSON(inspectionsUrl)
+                .done (function (data) {
+                  
+                $.each(data , function(i,v){
+                    $("div").append("<span class=display>" + "Tow Address : " + v.towed_to_address + "<br>" + "Make : " + v.make + "<br>" + "Color : " + v.color + "<br>" + "Facility Phone # : " + v.tow_facility_phone + "<br>" + "Inventory Number : " + v.inventory_number + "<span>");
+                });
+                    
+                })     
+        );
+        }
+        
+        
+    </script>
+     <button onclick="myFunction();">Execute</button>
+    </body>
+</html>

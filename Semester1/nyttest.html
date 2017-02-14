@@ -1,0 +1,20 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <script>
+            var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+url += '?' + $.param({
+  'api-key': "1ba49f72575b488cb937fea52070f4dc"
+});
+$.ajax({
+  url: url,
+  method: 'GET',
+}).done(function(result) {
+  console.log(result);
+}).fail(function(err) {
+  throw err;
+});
+        </script>
+    </body>
+</html>

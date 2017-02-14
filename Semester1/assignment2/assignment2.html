@@ -1,0 +1,57 @@
+<!Doctype html>
+    <HTML>
+        <HEAD>
+            <TITLE>About Me</TITLE>
+        </HEAD>
+        <BODY>
+            <H1>Sam Barouch</H1>
+            Things I like to do
+            <UL>
+                <LI>Video Games
+                <LI>Playing with my pets
+                <LI>Playing the violin <a href="https://www.youtube.com/watch?v=BGFA9NdghHQ">Click me!</a>
+                <LI>Sleeping
+                <LI>Watching TV
+            </UL>
+            <form>
+                  Favorite Animal:<br>
+                  <input type="text" name="animal"><br>
+                  Favorite Movie Death Scene:<br>
+                  <input type="text" name="movie">
+                  Email:<br>
+                  <input type="text" id="email" name="email">
+                  <input type="submit" name="submit">
+            </form> 
+            <Select>
+                <option>Cat</option>
+                <option>Dog</option>
+                <option>Fish</option>
+                <option>Demon</option>
+            </Select>
+            <IMG src="https://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg" width="100px" height="100px">
+            <Table style="border: 1px solid black;">
+                <tr>
+                    <td><B>Period</B></td> <td>1</td> <td>2</td> <td>3</td> <td>4</td> <td>5</td> <td>6</td> <td>7</td> <td>8</td>
+                </tr>
+                <tr>
+                    <td><B>Class</B></td> <td>Web Dev</td> <td>APES</td> <td>AP Lang</td> <td>Precalc</td> <td>Art</td> <td>Lunch</td> <td>Orchestra</td> <td>Seminar</td>
+                </tr>
+            </Table>
+            <button type="button" id="btnShowEmail" >Show email address</button>
+            <script>
+                document.getElementById("btnShowEmail").onclick=function(){
+                    var txtInputEmail = document.getElementById("email");
+                    var strEmail = txtInputEmail.value;   
+                    var message = "";
+                    if (strEmail === "") {
+                        message = "Hey, enter an email address!";
+                    }
+                    else {
+                        message = "The value in the email input box is " + strEmail;
+                    }
+                    alert(message);  
+                };
+            </script>
+
+        </BODY>
+    </HTML>
