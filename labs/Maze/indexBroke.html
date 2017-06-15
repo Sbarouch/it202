@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <style>
+      #map {visibility: hidden;}
+    </style>
+    
+  </head>
+  <body>
+    <canvas id="gameCanvas" width="800" height="800"></canvas>
+    
+<div id = "theimage">
+  <img src ="/themaze.png" id ="map">
+</div>
+    <script>
+      var c = document.getElementById("gameCanvas");
+      var ctx = c.getContext("2d");
+      var img=document.getElementById("map");
+      ctx.drawImage(img,10,10);
+      /*var zodiac = 0;
+      
+      function animate() {
+      zodiac ++;
+      if (zodiac % 8 == 0){
+      ctx.font = "bold 96px Arial";
+      ctx.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
+      ctx.fillText("S", 92, 200);
+      ctx.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
+      ctx.fillText("a", 150, 200);
+      ctx.fillStyle = 'hsl(' + 360 * Math.random() + ', 50%, 50%)';
+      ctx.fillText("m", 197, 200);
+      }
+        requestAnimationFrame(animate);
+      }
+      animate(); */
+      //Zodiac Code Above
+
+var X = 0;
+var Y = 0;
+var X2 = 0;
+var Y2 = 0;
+
+window.addEventListener("keydown", keysPressed, false);
+window.addEventListener("keyup", keysReleased, false);
+ 
+var keys = [];
+ 
+function keysPressed(e) {
+    // store an entry for every key pressed
+    keys[e.keyCode] = true;
+ 
+    // left
+    if (keys[37]) {
+      X -= 2;
+    }
+ 
+    // right
+    if (keys[39]) {
+      X += 2;
+    }
+ 
+    // down
+    if (keys[38]) {
+      Y -= 2;
+    }
+ 
+    // up
+    if (keys[40]) {
+      Y += 2;
+    }
+    // W
+    if (keys[87]) {
+      Y2 += 2;
+    }
+    // S
+    if (keys[83]) {
+      Y2 -= 2;
+    }
+    // A
+    if (keys[65]) {
+      X2 -= 2;
+    }
+    // D
+    if (keys[68]) {
+      X2 += 2;
+    }
+ 
+    e.preventDefault();
+    drawTriangle();
+}
+ 
+function keysReleased(e) {
+    // mark keys that were released
+    keys[e.keyCode] = false;
+}           
+function drawTriangle() {
+  // the triangle
+  ctx.clearRect(0, 0, c.width, c.height);
+  ctx.drawImage(img,10,10);
+  ctx.lineWidth= 1;
+  ctx.beginPath();
+  ctx.moveTo(210 + X, 100 + Y);
+  ctx.lineTo(195 + X, 100 + Y);
+  ctx.lineTo(195 + X, 115 + Y);
+  ctx.lineTo(210 + X, 115 + Y);
+  ctx.closePath();
+
+
+var imgData=ctx.getImageData(194,116,211,116);
+
+var imgData1=ctx.getImageData(194,99,211,99);
+
+var imgData2=ctx.getImageData(194,116,194,99); 
+
+var imgData3=ctx.getImageData(211,116,211,99);
+
+
+  // the outline
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = 'hsl(' + 360 * Math.random() + ', 100%, 50%)';
+  ctx.stroke();
+ 
+  // the fill color
+  ctx.fillStyle = 'hsl(' + 360 * Math.random() + ', 100%, 50%)';
+  ctx.fill();
+}
+drawTriangle();
+
+
+          </script>
+  </body>
+</html>

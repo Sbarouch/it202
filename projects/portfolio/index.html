@@ -1,0 +1,230 @@
+<!doctype html>
+<!--
+  Material Design Lite
+  Copyright 2015 Google Inc. All rights reserved.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+      https://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License
+-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A portfolio template that uses Material Design Lite.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Sam's Portfolio</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.grey-pink.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header mdl-layout__header--waterfall portfolio-header">
+            <div class="mdl-layout__header-row portfolio-logo-row">
+                <span class="mdl-layout__title">
+                    <div class="portfolio-logo"></div>
+                    <span class="mdl-layout__title">Web Development</span>
+                </span>
+            </div>
+            <div class="mdl-layout__header-row portfolio-navigation-row mdl-layout--large-screen-only">
+                <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+                    <a class="mdl-navigation__link is-active" href="index.html">Portfolio</a>
+                    <a class="mdl-navigation__link" href="about.html">About</a>
+                </nav>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer mdl-layout--small-screen-only">
+            <nav class="mdl-navigation mdl-typography--body-1-force-preferred-font">
+                <a class="mdl-navigation__link is-active" href="index.html">Portfolio</a>
+                <a class="mdl-navigation__link" href="about.html">About</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="mdl-grid portfolio-max-width">
+                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="http://www.transitchicago.com/assets/1/icons/mapicon_rail.png" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">CTA Stop Map</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        This project was a test of getting information on CTA stops and displaying it on a map. The intended goal was to utilize this in another application, but that integration failed.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://preview.c9users.io/sbarouch/webdev1617/Semester1/projectmap.html">Link </a>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="http://codeflow.org/entries/2013/feb/04/high-performance-js-heatmaps/heatmap.png" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Heatmap</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        This project was testing the concept of heatmaps with static coordinates. Later on I was able to use coordinates from an API to generate it.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://preview.c9users.io/sbarouch/webdev1617/Semester1/heatmap.html">Link</a>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="https://s-media-cache-ak0.pinimg.com/originals/33/3f/48/333f489947fe68b561b3d91707d7b4c1.jpg" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Potholes</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        This page was created when I was learning how to make API calls. It takes my school's zipcode and checks for pothole requests.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://preview.c9users.io/sbarouch/webdev1617/Semester1/potholes.html">Link</a>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="https://images-na.ssl-images-amazon.com/images/I/61M5KS3XTAL.png" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Airhorn</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        An obnoxious airhorn that creates an obnoxious noise. Uses a service worker to cache itself.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://preview.c9users.io/sbarouch/webdev1617/projects/Airhorn/index.html">Link</a>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="https://pbs.twimg.com/profile_images/596832947732262912/vopvWDZw.jpg" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">About me</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        A <b>VERY</b> basic project I did at the beginning of the year, only here to show improvement.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://preview.c9users.io/sbarouch/webdev1617/Semester1/me.html">Link</a>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR2brvxjGPjR19EZOgNtLCg4dfiPCT9B9bN3vGayOqAqV5BoSBxtg" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Responsive Web Design</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        This page was made following a tutorial on responsive design back in October.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://preview.c9users.io/sbarouch/webdev1617/Semester1/Responsive/RWD2.html">Link</a>
+                    </div>
+                </div>
+                 <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="http://upload.wikimedia.org/wikipedia/commons/8/81/Rc-table.png" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Data App</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        This project was a collaboration with Brendan. It utilizes the City Data Portal to locate train stops, then can bring you to a google map to get directions to them. 
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://preview.c9users.io/sbarouch/webdev1617/projects/DataAppTrainTracker/index.html">Link</a>
+                    </div>
+                </div>
+                <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="https://www.chicagorailfan.com/p5800.jpg" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Bus Tracker</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        This bus tracker app tracks busses near my school. It utilizes the CTA's API to get information on bus times, and then displays that on a material design interface
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://preview.c9users.io/sbarouch/webdev1617/projects/2/index.html">Link</a>
+                    </div>
+                </div>
+                 <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-nNv-tXXFjvOB6W140fZuh1H5LBiyMS7r61ATZvOHz4xs3mzn" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Maze Game</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                       This was my attempt at a Maze game. Unfortunately, I challenged myself to do something that was outside my current capabilities. As a result of this, I wasted a lot of time trying things that ultimately did not work, and the maze is unfinished as a result. Skull picture bcuz cool!
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://preview.c9users.io/sbarouch/webdev1617/labs/Maze/index.html">Link</a>
+                    </div>
+                    </div>
+                 <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="https://i.ytimg.com/vi/wcP98zlwojE/maxresdefault.jpg" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Three-Screen App</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                       This was a pretty simple attempt to make a multi-screen application on one file. I asked my mom what would be useful for her on a three-screen app, and followed her instructions for it.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://preview.c9users.io/sbarouch/webdev1617/projects/3screen/index.html">Link</a>
+                    </div>
+                    </div>
+                 <div class="mdl-cell mdl-card mdl-shadow--4dp portfolio-card">
+                    <div class="mdl-card__media">
+                        <img class="article-image" src="http://pa1.narvii.com/5744/4e0161f94017b5ea55795e72eb1031fa017f2854_hq.gif" border="0" alt="">
+                    </div>
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Dexie Example</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        This was an app that took data in JSON format from the Chicago Data Portal APIs and turned them into Dexie databases. This was created as a dexie test, just to see if it worked, so nothing is hooked up to the data, but the data is there.
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-button--accent" href="https://preview.c9users.io/sbarouch/webdev1617/labs/Dexie/indexedDB.html">Link</a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="mdl-mini-footer">
+                <div class="mdl-mini-footer__left-section">
+                    <div class="mdl-logo">Simple portfolio website</div>
+                </div>
+                <div class="mdl-mini-footer__right-section">
+                    <ul class="mdl-mini-footer__link-list">
+                        <li><a href="#">Help</a></li>
+                        <li><a href="#">Privacy & Terms</a></li>
+                    </ul>
+                </div>
+            </footer>
+        </main>
+    </div>
+    <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+</body>
+
+</html>

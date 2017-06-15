@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Find My Car!</title>
+        <title>Train Stop Locator</title>
         <style>
             p, h1 {font-family: helvetica;}
             p {font-size:1.5em;line-height:1.5em; margin-left: 24px;}
@@ -37,10 +37,9 @@
         <p>
             Enter a stop name. 
             <br>
-            Visit <a href="https://data.cityofchicago.org/Transportation/Towed-Vehicles/ygr5-vcbg">the Data Portal page for the towed vehicles dataset</a> to find a valid plate number.</p>
-        <input id="txtPlate" type="text" placeholder="Enter your License Plate"></input>
+          
+        <input id="txtPlate" type="text" placeholder="Enter your stop name!"></input>
         <button type="button" id="btnSearch" >Find stop</button>
-        <button id="show-map">Show on map></button>
     </div>
     
     <!-- a div to store the results -->
@@ -53,7 +52,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script>
-        var showMap = $('#show-map');
 
 function initialize() {
     var mapOptions = {
@@ -63,9 +61,7 @@ function initialize() {
 	var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 }
 
-$(document).ready(function(){
-    $('#show-map').on('click',initialize)
-});
+
     </script>
     <script>
         /*
@@ -146,7 +142,7 @@ $(document).ready(function(){
                                 function (index, value) {
                                     // append content to the body 
 var html = "<div id = " + i + ">" + "<h2>Train Stop</h2>" +  "<h2>Train Stop: " + value.stop_name + "</h2>" + 
-                        "<h2>Train Station: " + value.station_descriptive_name + "</h2>" + "<h2>Red: " + value.red + "</h2>" + 
+                        "<h2>Train Station: " + value.station_descriptive_name  + "</h2>" + "<a href='https://www.google.com/maps/search/"+value.stop_name+"+train+stop'>Click here!</a>" +
                         "</div>" + "<br>";
                         $("body").append(html);
                         $("div").css("border-radius", "25px");
@@ -217,7 +213,6 @@ var html = "<div id = " + i + ">" + "<h2>Train Stop</h2>" +  "<h2>Train Stop: " 
         }); // end of jQuery wrapper
                                           
     </script>
-    <div id="map-canvas" class="output">
     </div>
     </body>
 </html>
